@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+      - name: web-app
+        image: <AWS_ACCOUNT>.dkr.ecr.eu-central-1.amazonaws.com/web-app:1.0.0 # {"$imagepolicy": "default:web-app"}
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        

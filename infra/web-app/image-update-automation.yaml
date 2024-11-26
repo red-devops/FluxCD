@@ -1,0 +1,26 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: web-app-update
+  namespace: default
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: web-app
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |-
+        Automated image update by Flux 
+    push:
+      branch: main
+  update:
+    path: ./infra/web-app/deploy/deployment.yaml
+    strategy: Setters

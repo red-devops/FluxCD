@@ -1,0 +1,13 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: web-app
+  namespace: default
+spec:
+  interval: 30s
+  ref:
+    branch: main
+  url: ssh://git@github.com:22/Red-DevOps/FluxCD.git
+  secretRef:
+    name:  web-app-auth
